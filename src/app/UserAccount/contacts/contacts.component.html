@@ -1,0 +1,49 @@
+<h2 style="font-family: sans-serif; text-align: center; "  >Contact
+    <button (click)="gotoaddcontact()" class="btn btn-success"  >    
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+</h2>
+<hr>
+<div *ngIf="show_contact">
+    <div  *ngIf="contacts.length==0" style="text-align: center;padding-bottom: 6px;" > You have no contacts </div>
+    <ul class="list-group"  *ngIf="contacts.length!=0"   >
+        <div *ngFor="let con of contacts;let i = index" >
+            <li class="list-group-item" >
+                  <h4 style="text-align: center;"  >  {{con.c_name}} : {{con.c_phn_no}} </h4> 
+                 <button type="button" class="btn btn-danger" 
+                 style="position: absolute;right:22px;top:20px" 
+                 (click)="delet(i)"    >
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>    
+            </li>
+        </div>
+    </ul>    
+</div>
+<div *ngIf="add_con">
+    <form #contactform="ngForm" >
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input ngModel #c_name="ngModel" name="c_name" required
+          type="text" class="form-control" id="name"  placeholder="Enter name">   
+          <div *ngIf="c_name.invalid && ( c_name.touched)" class="text-danger">
+            <div *ngIf="c_name.errors.required" > 
+              <small>*Name is required</small>
+            </div>
+        </div>   
+        </div>
+        <div class="form-group">
+          <label for="phn">Content</label>
+          <input ngModel #c_phn_no="ngModel" name="c_phn_no" required minlength="10" maxlength="10"
+          type="text" class="form-control" id="phn" placeholder="Phone Number">
+            <div *ngIf="c_phn_no.invalid && ( c_phn_no.touched)" class="text-danger">
+            <div *ngIf="c_phn_no.errors.required" > 
+              <small>*Phone number is required</small>
+            </div>
+            <div *ngIf="c_phn_no.errors.minlength">
+                <small>Phone number should have 10 digits</small>
+            </div>
+            </div>   
+        </div>
+        <button type="submit" [disabled]="contactform.form.invalid" (click)="addcontact(contactform.value)" class="btn btn-primary" >Add</button>
+      </form>
+</div> 

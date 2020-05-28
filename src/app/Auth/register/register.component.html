@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form #userForm="ngForm" >
+            <div class="form-group">
+                <label for="inputName">Name </label>
+                <input ngModel required #name="ngModel"
+                 type="text" class="form-control" name="name" placeholder="Enter Name"  >
+                 <div *ngIf="name.invalid && ( name.touched)" class="text-danger">
+                    <div *ngIf="name.errors.required" > 
+                      <small>*Name is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group"> 
+                <label for="exampleInputEmail">Email address</label>
+                <input    name = "mail_id" ngModel required  email
+                #mail ="ngModel"  
+                type="email" class="form-control " id="exampleInputEmail"  placeholder="Enter email">
+                <div *ngIf="mail.invalid && ( mail.touched)" class="text-danger">
+                    <div *ngIf="mail.errors.required" > 
+                      <small>*Mail is required</small>
+                    </div>
+                    <div *ngIf="mail.errors.email"> 
+                        <small>Invalid mail</small>
+                    </div>
+                </div>
+                <div *ngIf="mailTaken" class="text-danger">
+                    <small>Mial id already taken</small>
+                </div>
+
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPhn">Phone number</label>
+                <input ngModel name="phn_no" required #phone="ngModel" minlength="10" maxlength="10"
+                type="tel" class="form-control"   placeholder="Enter phone number">
+                <div *ngIf="phone.invalid&&phone.touched" class="text-danger">
+                    <div *ngIf="phone.errors.required">
+                        <small>*Phone number is required</small>
+                    </div>
+                    <div *ngIf="phone.errors.minlength||phone.errors.maxlength">
+                        <small>Phone number should have 10 digits</small>
+                    </div>
+                </div>
+                <div *ngIf="phntaken" class="text-danger">
+                    <small>Phone number already in use</small>
+                </div>
+            </div>  
+
+            <div class="form-group">
+                <label for="exampleInputPassword">Password</label>
+                <input  name = "password" ngModel required minlength="8" #password="ngModel"
+                type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                <div *ngIf="password.invalid && ( password.touched)" class="text-danger">
+                  <div *ngIf="password.errors.required" > 
+                    <small>*Password is required</small>
+                  </div>
+                  <div *ngIf="password.errors.minlength"> 
+                      <small>Should conatin minimum 8 characters</small>
+                  </div>
+              </div>
+              </div>
+
+            <button type="submit" [disabled]="userForm.form.invalid" class="btn btn-primary" (click)="regUser(userForm.value)" >Submit</button>
+          </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>

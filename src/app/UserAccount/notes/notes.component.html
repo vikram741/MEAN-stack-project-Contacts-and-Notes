@@ -1,0 +1,56 @@
+<h2 style="font-family: sans-serif; text-align: center; "  >Todo
+    <button (click)="gotoaddnote()" class="btn btn-success"  >    
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+</h2>
+<hr>
+<div *ngIf="show_content">
+    <div  *ngIf="notes.length==0" style="text-align: center; padding-bottom: 4px;" > You have no Todo </div>
+    <ul class="list-group"  *ngIf="notes.length!=0"   >
+        <div *ngFor="let note of notes;let i = index" >
+            <li class="list-group-item" >
+                <button type="button" class="btn " style="width:100%;padding-top: 1px;padding-bottom:1px;"
+                 (click)="expand[i]=!expand[i]"   >
+                <h4> {{notes[i].title}}  </h4>  
+                 <div *ngIf="!expand[i]"  class="fa fa-chevron-down" aria-hidden="true"></div>             
+                 <div *ngIf="expand[i]"  class="fa fa-chevron-up" aria-hidden="true"></div>
+    
+                 <button type="button" class="btn btn-danger" 
+                 style="position: absolute;right:22px;top:20px" 
+                 (click)="delet(i)"    >
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+    
+                </button> <br>
+                <div *ngIf="expand[i]"  style="padding-top: 2px;" > <h5> {{notes[i].content}}</h5></div>
+            </li>
+        </div>
+    </ul>    
+</div>
+<div *ngIf="add_note">
+    <form #noteForm = "ngForm" >
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" ngModel  #title="ngModel" required name="title"
+           class="form-control" id="title"  placeholder="Enter title">
+           <div *ngIf="title.invalid && ( title.touched)" class="text-danger">
+            <div *ngIf="title.errors.required" > 
+              <small>*Title is required</small>
+            </div>
+        </div>   
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <input type="text" ngModel #content="ngModel"  required name="content"
+          class="form-control" id="content" placeholder="Content">
+          <div *ngIf="content.invalid && ( content.touched)" class="text-danger">
+            <div *ngIf="content.errors.required" > 
+              <small>*Content is required</small>
+            </div>
+        </div>
+        </div>
+
+        <button type="submit" [disabled]="noteForm.form.invalid" (click)="addnote(noteForm.value)" class="btn btn-primary" >Add</button>
+      </form>
+</div>

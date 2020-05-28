@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-4"></div>
+      <div class=" col-md-4  ">
+          <ul class = "nav nav-tabs"  *ngIf="!checklogin()" >
+              <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
+                <a routerLink="/"  class="nav-item nav-link" >Home</a>
+              </li>
+              <li role="presentation"  routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                  <a routerLink="/login"  class="nav-item nav-link" >Login</a>
+              </li>
+              <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"> 
+                  <a routerLink="/register"  class="nav-item nav-link"  >Signup</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+<br><br>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

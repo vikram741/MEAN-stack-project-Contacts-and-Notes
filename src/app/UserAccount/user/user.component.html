@@ -1,0 +1,21 @@
+<app-info></app-info>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-xs-4"><button (click)="gotonotes()" class="btn btn-warning">Notes</button> </div>
+                <div class="col-xs-4"><button (click)="gotocontacts()" class="btn btn-warning">Contacts</button> </div>
+                    <div class="col-xs-4"><button (click)="logout()" class="btn btn-warning">Logout</button></div>
+            </div>
+            <br>
+
+            <app-notes *ngIf="showNotes" ></app-notes>
+            <app-contacts *ngIf="showContacts" ></app-contacts>
+
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

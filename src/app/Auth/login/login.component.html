@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <form #logForm="ngForm">
+
+      <div class="form-group"> 
+        <label for="exampleInputEmail1">Email address</label>
+        <input    name = "mail_id" ngModel required  email
+        #mail ="ngModel"  
+        type="email" class="form-control " id="exampleInputEmail1"  placeholder="Enter email">
+        <div *ngIf="mail.invalid && ( mail.touched)" class="text-danger">
+            <div *ngIf="mail.errors.required" > 
+              <small>*Mail is required</small>
+            </div>
+            <div *ngIf="mail.errors.email"> 
+                <small>Invalid mail</small>
+            </div>
+        </div>
+        <div *ngIf="wrngmail" class="text-danger"> 
+          <small>Mial id not found</small>
+        </div>
+      </div>
+        
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input  name = "password" ngModel required minlength="8" #password="ngModel"
+        type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <div *ngIf="password.invalid && ( password.touched)" class="text-danger">
+          <div *ngIf="password.errors.required" > 
+            <small>*Password is required</small>
+          </div>
+          <div *ngIf="password.errors.minlength"> 
+              <small>Should conatin minimum 8 characters</small>
+          </div>
+      </div>
+      <div *ngIf="wrngpswd" class="text-danger"> 
+        <small>Wrong password</small>
+      </div>
+      </div>
+
+
+      <button type="submit" [disabled]="logForm.form.invalid" class="btn btn-primary" (click)="loginUser(logForm.value)" >Submit</button>
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
